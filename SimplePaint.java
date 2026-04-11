@@ -29,7 +29,7 @@ public class SimplePaint extends JFrame {
             btn.setForeground(Color.WHITE);
             btn.addActionListener(e -> {
                 currentColor = getColorByName(colorName);
-                drawArea.setCurrentColor(currentColor);
+            //    drawArea.setCurrentColor(currentColor);
             });
             controls.add(btn);
         }
