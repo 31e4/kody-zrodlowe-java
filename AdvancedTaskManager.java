@@ -10,6 +10,9 @@ import java.io.*;
 import com.google.gson.*;
 import com.google.gson.reflect.*;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
 public class AdvancedTaskManager extends JFrame {
 
     private JPanel taskListPanel;
