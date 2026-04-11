@@ -180,7 +180,7 @@ public class AdvancedTaskManager extends JFrame {
         dialog.add(label);
         dialog.pack();
         dialog.setLocationRelativeTo(this);
-        javax.swing.Timer timer = new Timer(2000, e -> dialog.dispose());
+        javax.swing.Timer timer = new javax.swing.Timer(2000, e -> dialog.dispose());
         timer.setRepeats(false);
         timer.start();
         dialog.setVisible(true);
