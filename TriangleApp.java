@@ -7,6 +7,7 @@ public class TriangleApp extends JFrame {
 
     private DrawPanel drawPanel;
     private JButton centroidBtn, incircleBtn, circumcircleBtn;
+    private JButton heightsBtn; /// new feature button
 
     public TriangleApp() {
         setTitle("Triangle Geometry App");
@@ -22,10 +23,12 @@ public class TriangleApp extends JFrame {
         centroidBtn = new JButton("Draw Centroid");
         incircleBtn = new JButton("Draw Incircle");
         circumcircleBtn = new JButton("Draw Circumcircle");
+        heightsBtn = new JButton("Draw Heights"); ///
 
         controlPanel.add(centroidBtn);
         controlPanel.add(incircleBtn);
         controlPanel.add(circumcircleBtn);
+        controlPanel.add(heightsBtn); ///
 
         add(controlPanel, BorderLayout.SOUTH);
 
@@ -33,6 +36,7 @@ public class TriangleApp extends JFrame {
         centroidBtn.addActionListener(e -> {drawPanel.showCentroid = true; drawPanel.repaint();});
         incircleBtn.addActionListener(e -> {drawPanel.showIncircle = true; drawPanel.repaint();});
         circumcircleBtn.addActionListener(e -> {drawPanel.showCircumcircle = true; drawPanel.repaint();});
+        heightsBtn.addActionListener(e -> {drawPanel.showHeights = true; drawPanel.repaint();}); ///
 
         setVisible(true);
     }
@@ -49,6 +53,7 @@ class DrawPanel extends JPanel {
     boolean showCentroid = false;
     boolean showIncircle = false;
     boolean showCircumcircle = false;
+    boolean showHeights = false; ///
 
     public DrawPanel() {
         addMouseListener(new MouseAdapter() {
@@ -81,9 +86,10 @@ class DrawPanel extends JPanel {
             g2.drawLine(B.x, B.y, C.x, C.y);
             g2.drawLine(C.x, C.y, A.x, A.y);
 
-            if (showCentroid) drawCentroid(g2, A, B, C);
-            if (showIncircle) drawIncircle(g2, A, B, C);
-            if (showCircumcircle) drawCircumcircle(g2, A, B, C);
+            if (showCentroid) drawCentroid(g2, A, B, C);         ///
+            if (showIncircle) drawIncircle(g2, A, B, C);         ///
+            if (showCircumcircle) drawCircumcircle(g2, A, B, C); ///
+            if (showHeights) drawHeights(g2, A, B, C);           ///
         }
     }
 
@@ -141,4 +147,30 @@ class DrawPanel extends JPanel {
         g2.drawOval((int)(ux - r), (int)(uy - r), (int)(2*r), (int)(2*r));
         g2.setColor(Color.BLACK);
     }
+
+    private void drawHeights(Graphics2D g2, Point A, Point B, Point C) { ///
+        g2.setColor(Color.MAGENTA);                                      ///
+                                                                         ///
+        drawAltitude(g2, A, B, C); // from A to BC                       ///
+        drawAltitude(g2, B, A, C); // from B to AC                       ///
+        drawAltitude(g2, C, A, B); // from C to AB                       ///
+                                                                         ///
+    g2.setColor(Color.BLACK);                                            ///
+    }                                                                    ///
+
+    private void drawAltitude(Graphics2D g2, Point P, Point A, Point B) {  ///
+        // Line AB represented as ax + by + c = 0                          ///
+        double a = B.y - A.y;                                              ///
+        double b = A.x - B.x;                                              ///
+        double c = B.x * A.y - A.x * B.y;                                  ///
+                                                                           ///
+        // Foot of perpendicular from P to AB                              ///
+        double d = (a * P.x + b * P.y + c) / (a * a + b * b);              ///
+                                                                           ///
+        double x = P.x - a * d;                                            ///
+        double y = P.y - b * d;                                            ///
+                                                                           ///
+        // Draw altitude                                                   ///
+        g2.drawLine(P.x, P.y, (int)x, (int)y);                             ///
+    }                                                                      ///
 }
