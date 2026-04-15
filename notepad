@@ -2,6 +2,12 @@ C++ [dictionary]       [term] + [meaning]     this is defining the same in inter
 
 [term] or [gesture] is just a proxy between reality and meaning
 
+understanding a text is to understand every term in this text
+
+if few terms create a series the ORDER is sometimes important
+
+this series in this order [ [term1] then [term2] then [term3] ]  creates a new [TERM123]
+
 double *f()
 declare f as [function] returning [pointer to double]
 
